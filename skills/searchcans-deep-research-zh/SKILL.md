@@ -1,6 +1,10 @@
 ---
 name: searchcans-deep-research-zh
 description: 使用 SearchCans SERP API 和 Reader API 执行有界、证据驱动、账户感知的中文深度研究。适用于需要当前网页证据的市场、竞品、技术、政策、公司或产品问题；先规划 3–5 个子问题，指定市场和语言，读取来源、处理冲突，并交付可追溯 URL 的研究简报。
+metadata:
+  author: SearchCans
+  version: 1.0.0
+  tags: [deep-research, web-research, serp-api, reader-api, chinese]
 ---
 
 # SearchCans 中文深度研究

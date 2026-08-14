@@ -1,6 +1,10 @@
 ---
 name: searchcans-serp-content-gap-zh
 description: 使用 SearchCans 分析当前、地域化的 Google 或 Bing SERP，并将自然结果、People Also Ask、相关搜索、知识图谱和新闻信号转化为证据驱动、账户感知的中文内容机会简报。适用于 SEO/GEO 内容规划、关键词研究、竞品页面分析和搜索意图分析。
+metadata:
+  author: SearchCans
+  version: 1.0.0
+  tags: [serp-api, seo, geo, keyword-research, chinese]
 ---
 
 # SearchCans 中文 SERP 内容差距分析
