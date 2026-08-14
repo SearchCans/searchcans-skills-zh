@@ -1,0 +1,21 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.key
+*_key.txt
+searchcans_key.txt
+
+# Local setup and test artifacts
+.init-deps/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+coverage.xml
+htmlcov/
+*.out.json
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/

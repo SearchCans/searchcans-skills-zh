@@ -1,0 +1,4 @@
+interface:
+  display_name: "SearchCans 中文 Reader SEO 审计"
+  short_description: "使用成本感知 Reader 配置审计网页提取与基础 SEO 信号"
+  default_prompt: "使用 $searchcans-reader-seo-audit-zh 审计这个 URL 的提取质量与基础 SEO 信号。"

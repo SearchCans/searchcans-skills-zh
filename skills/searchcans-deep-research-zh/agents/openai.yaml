@@ -1,0 +1,4 @@
+interface:
+  display_name: "SearchCans 中文深度研究"
+  short_description: "使用可追溯网页证据、积分预算和并发控制完成中文深度研究"
+  default_prompt: "使用 $searchcans-deep-research-zh 规划 3–5 个子问题，并仅以已读取网页支撑结论。"
