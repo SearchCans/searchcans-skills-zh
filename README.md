@@ -76,7 +76,7 @@ $env:SEARCHCANS_API_KEY = "your-api-key"
 python -m unittest discover -s tests -v
 ```
 
-建议设置的 GitHub Topics：`searchcans`、`agent-skills`、`claude-skills`、`claude-code-skill`、`ai-agents`、`deep-research`、`serp-api`、`reader-api`、`web-research`、`seo`、`geo`、`rag`、`中文`、`中文技能`。
+建议设置的 GitHub Topics：`searchcans`、`agent-skills`、`claude-skills`、`claude-code-skill`、`ai-agents`、`deep-research`、`serp-api`、`reader-api`、`web-research`、`seo`、`geo`、`rag`、`chinese`、`zh-cn`。
 
 ## 许可证
 
