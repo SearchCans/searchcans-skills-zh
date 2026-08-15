@@ -1,0 +1,51 @@
+name: 同步自动生成的中文 GitHub Wiki
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/skills.json"
+      - "docs/generated/wiki/**"
+      - "scripts/generate_docs.py"
+      - "scripts/sync_wiki.py"
+      - "skills/**/SKILL.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "searchcans-skills-zh-wiki"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify the Wiki token is configured
+        env:
+          WIKI_SYNC_TOKEN: ${{ secrets.WIKI_SYNC_TOKEN }}
+        run: |
+          test -n "$WIKI_SYNC_TOKEN" || { echo "请先设置仓库机密 WIKI_SYNC_TOKEN，再同步 Wiki。"; exit 1; }
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python scripts/generate_docs.py --check
+      - name: Clone and synchronize the Wiki repository
+        env:
+          WIKI_SYNC_TOKEN: ${{ secrets.WIKI_SYNC_TOKEN }}
+        run: |
+          askpass="$RUNNER_TEMP/wiki-askpass.sh"
+          printf '%s\n' '#!/usr/bin/env sh' 'case "$1" in' '*Username*) printf "%s" "x-access-token" ;;' '*Password*) printf "%s" "$WIKI_SYNC_TOKEN" ;;' 'esac' > "$askpass"
+          chmod 700 "$askpass"
+          export GIT_ASKPASS="$askpass"
+          export GIT_TERMINAL_PROMPT=0
+          git clone "https://github.com/${GITHUB_REPOSITORY}.wiki.git" wiki
+          python scripts/sync_wiki.py --source docs/generated/wiki --target wiki
+          git -C wiki config user.name "SearchCans"
+          git -C wiki config user.email "support@searchcans.com"
+          git -C wiki add --all
+          if git -C wiki diff --cached --quiet; then exit 0; fi
+          git -C wiki commit -m "docs: sync generated Chinese Skill documentation"
+          git -C wiki push

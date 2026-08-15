@@ -1,0 +1,7 @@
+interface:
+  display_name: "SearchCans RAG 来源策展"
+  short_description: "创建小而多样、经过读取验证的 RAG 来源清单"
+  default_prompt: "使用 $searchcans-rag-source-curator-zh 为这个 RAG 问题建立经读取验证的来源清单。"
+
+policy:
+  allow_implicit_invocation: false

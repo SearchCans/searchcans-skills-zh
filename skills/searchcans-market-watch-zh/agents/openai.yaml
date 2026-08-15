@@ -1,0 +1,7 @@
+interface:
+  display_name: "SearchCans 市场观察"
+  short_description: "结合 Google、新闻、Bing 与网页证据创建市场快照"
+  default_prompt: "使用 $searchcans-market-watch-zh 为这个市场问题制作一份地域化、可追溯的快照。"
+
+policy:
+  allow_implicit_invocation: false

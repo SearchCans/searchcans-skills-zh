@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "site": {
+    "title": "SearchCans 中文 Agent Skills",
+    "description": "SearchCans 官方简体中文 Agent Skills：地域化 SERP、网页/文件提取、截图与账户感知控制。",
+    "repository_url": "https://github.com/SearchCans/searchcans-skills-zh",
+    "api_docs_url": "https://www.searchcans.com/apis/",
+    "base_url": "https://searchcans.github.io/searchcans-skills-zh"
+  },
+  "skills": [
+    {
+      "name": "searchcans-deep-research-zh",
+      "title": "SearchCans 中文深度研究",
+      "page": "SearchCans-中文深度研究",
+      "category": "证据驱动研究",
+      "best_for": "市场、竞品、技术、政策、公司和产品的当前网页研究",
+      "delivers": "包含可追溯 URL、冲突与不确定性的有界研究简报",
+      "apis": ["Google 或 Bing 搜索", "Reader", "Account"],
+      "account_policy": "一次预检，限制 Reader 来源数，并让并发不超过报告的 Parallel Lane。",
+      "example": "使用 $searchcans-deep-research-zh 调研美国 SERP API 市场的最新变化。"
+    },
+    {
+      "name": "searchcans-serp-content-gap-zh",
+      "title": "SearchCans SERP 内容差距",
+      "page": "SearchCans-SERP-内容差距",
+      "category": "SEO 与 GEO 规划",
+      "best_for": "关键词研究、搜索意图分析、竞品页面审查和内容机会规划",
+      "delivers": "基于已观察 Google 或 Bing SERP 特征的地域化内容机会简报",
+      "apis": ["Google 或 Bing 搜索", "Account"],
+      "account_policy": "对多页任务预检，并在计划请求超出预算时限制页数。",
+      "example": "使用 $searchcans-serp-content-gap-zh 分析这个关键词在美国市场的内容机会。"
+    },
+    {
+      "name": "searchcans-reader-seo-audit-zh",
+      "title": "SearchCans Reader SEO 审计",
+      "page": "SearchCans-Reader-SEO-审计",
+      "category": "提取与技术审查",
+      "best_for": "网页转 Markdown、RAG 输入检查、动态页、PDF、Office 文件和页面级 SEO/GEO 审查",
+      "delivers": "包含 canonical、H1、meta description、JSON-LD、文件和截图信号的提取报告",
+      "apis": ["Reader", "文件提取", "截图", "Account"],
+      "account_policy": "更高成本代理请求前自动预检；常规提取保持轻量。",
+      "example": "使用 $searchcans-reader-seo-audit-zh 检查这个页面的提取效果和 SEO 信号。"
+    },
+    {
+      "name": "searchcans-market-watch-zh",
+      "title": "SearchCans 市场观察",
+      "page": "SearchCans-市场观察",
+      "category": "市场与新闻情报",
+      "best_for": "竞品、品类、发布、公关与新闻跟踪，并可比较快照",
+      "delivers": "包含 Google、Google News、Bing 和 Reader 证据的 URL 级市场快照",
+      "apis": ["Google 搜索", "Google News", "Bing 搜索", "Reader", "Account"],
+      "account_policy": "一次预检，限制新闻来源读取，并遵循报告的 Lane 数。",
+      "example": "使用 $searchcans-market-watch-zh 为这个品类创建美国市场快照。"
+    },
+    {
+      "name": "searchcans-product-serp-brief-zh",
+      "title": "SearchCans 商品 SERP 简报",
+      "page": "SearchCans-商品-SERP-简报",
+      "category": "电商情报",
+      "best_for": "电商品类研究、商家发现、商品页规划和地域化陈列策略",
+      "delivers": "包含 Google Shopping、网页、图片和可选商家页面证据的简报",
+      "apis": ["Google Shopping", "Google 搜索", "Google 图片", "Reader", "Account"],
+      "account_policy": "预估三次 SERP 与明确 Reader URL；需要时仅限制来源读取。",
+      "example": "使用 $searchcans-product-serp-brief-zh 调研这个商品品类在美国市场的搜索表现。"
+    },
+    {
+      "name": "searchcans-content-format-brief-zh",
+      "title": "SearchCans 内容形式简报",
+      "page": "SearchCans-内容形式-简报",
+      "category": "SEO 与 GEO 规划",
+      "best_for": "编辑形式发现、视觉/视频搜索研究和 SEO/GEO 内容形式规划",
+      "delivers": "地域化 Google 网页、图片、视频和短视频结果的形式清单",
+      "apis": ["Google 搜索", "Google 图片", "Google 视频", "Google 短视频", "Account"],
+      "account_policy": "为每个选定形式预检，并按固定优先级限制实际搜索面。",
+      "example": "使用 $searchcans-content-format-brief-zh 映射这个主题在目标市场的内容形式。"
+    },
+    {
+      "name": "searchcans-rag-source-curator-zh",
+      "title": "SearchCans RAG 来源策展",
+      "page": "SearchCans-RAG-来源策展",
+      "category": "RAG 与知识库入库",
+      "best_for": "Grounding Pack、来源策展、知识库入库和预入库证据检查",
+      "delivers": "小规模、域名多样且经过 Reader/文件提取验证的来源清单",
+      "apis": ["Google 或 Bing 搜索", "Reader", "文件提取", "截图", "Account"],
+      "account_policy": "预估搜索与 Reader/文件预算，限制来源数并让 worker 不超过 Lane 数。",
+      "example": "使用 $searchcans-rag-source-curator-zh 为这个 RAG 问题策展可作为证据的来源。"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://searchcans.github.io/searchcans-skills-zh/sitemap.xml

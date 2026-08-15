@@ -6,6 +6,7 @@ import sys
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -199,6 +200,66 @@ class SearchCansScriptTests(unittest.TestCase):
         self.assertEqual(parser.h1s, ["One heading"])
         self.assertEqual(parser.jsonld_count, 1)
         self.assertEqual(parser.jsonld_invalid, 0)
+
+    def test_market_watch_selects_diverse_news_domains_and_budget_caps_reads(self) -> None:
+        module = load_module("market_watch", "skills/searchcans-market-watch-zh/scripts/market_watch.py")
+        selected = module.select_news_sources(
+            [
+                {"url": "https://one.example/a", "title": "A"},
+                {"url": "https://one.example/b", "title": "B"},
+                {"url": "https://two.example/c", "title": "C"},
+            ],
+            3,
+        )
+        self.assertEqual([item["url"] for item in selected], ["https://one.example/a", "https://two.example/c", "https://one.example/b"])
+        self.assertEqual(module.cap_reads(5, search_credits=3, reader_credits=2, requested=4), 1)
+        self.assertIsNone(module.cap_reads(2, search_credits=3, reader_credits=2, requested=4))
+
+    def test_product_brief_normalizes_observed_price_without_price_claim(self) -> None:
+        module = load_module("product_brief", "skills/searchcans-product-serp-brief-zh/scripts/product_serp_brief.py")
+        original_post = module.post
+        module.post = lambda *args, **kwargs: {
+            "code": 0,
+            "data": {"shopping_results": [{"position": 1, "title": "Example", "source": "Merchant", "price": "$19.99", "extracted_price": 19.99}]},
+        }
+        try:
+            response = module.search("google_shopping", "example", SimpleNamespace(country="us", language="en", timeout_ms=30000, client_timeout=35, retries=1))
+        finally:
+            module.post = original_post
+        self.assertEqual(response["results"][0]["merchant"], "Merchant")
+        self.assertEqual(response["results"][0]["extracted_price"], 19.99)
+        self.assertEqual(module.cap_reads(6, search_credits=3, reader_cost=2, requested=3), 1)
+        self.assertTrue(module.valid_url("https://merchant.example/product"))
+
+    def test_content_format_normalizes_video_and_short_video_shapes(self) -> None:
+        module = load_module("format_brief", "skills/searchcans-content-format-brief-zh/scripts/content_format_brief.py")
+        video = module.normalize_surface(
+            "videos",
+            {"code": 0, "data": {"video_results": [{"position": 1, "title": "Watch", "link": "https://video.example", "duration": "1:00", "channel": "Channel"}]}},
+        )
+        short_video = module.normalize_surface(
+            "short-videos",
+            {"code": 0, "data": {"short_video_results": [{"position": 1, "title": "Clip", "link": "https://clip.example", "source": "YouTube", "channel": "Creator", "duration": "0:30"}]}},
+        )
+        self.assertEqual(video["results"][0]["duration"], "1:00")
+        self.assertEqual(short_video["results"][0]["channel"], "Creator")
+
+    def test_rag_curator_preserves_explicit_files_and_diversifies_search_domains(self) -> None:
+        module = load_module("rag_curator", "skills/searchcans-rag-source-curator-zh/scripts/rag_source_curator.py")
+        sources = module.select_sources(
+            [
+                {"query": "question", "organic": [
+                    {"url": "https://one.example/a", "title": "A", "position": 1},
+                    {"url": "https://one.example/b", "title": "B", "position": 2},
+                    {"url": "https://two.example/c", "title": "C", "position": 3},
+                ]}
+            ],
+            ["https://files.example/document.pdf"],
+            3,
+        )
+        self.assertEqual([item["kind"] for item in sources], ["file", "web", "web"])
+        self.assertEqual([item["url"] for item in sources[1:]], ["https://one.example/a", "https://two.example/c"])
+        self.assertEqual(module.canonical_url("HTTPS://Example.COM/a#fragment"), "https://example.com/a")
 
 
 if __name__ == "__main__":

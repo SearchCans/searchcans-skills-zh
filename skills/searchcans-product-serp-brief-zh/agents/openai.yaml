@@ -1,0 +1,7 @@
+interface:
+  display_name: "SearchCans 商品 SERP 简报"
+  short_description: "比较 Shopping、网页、图片与商家页面证据"
+  default_prompt: "使用 $searchcans-product-serp-brief-zh 调研这个商品品类在目标市场的搜索表现。"
+
+policy:
+  allow_implicit_invocation: false

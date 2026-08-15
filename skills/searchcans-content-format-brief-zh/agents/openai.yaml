@@ -1,0 +1,7 @@
+interface:
+  display_name: "SearchCans 内容形式简报"
+  short_description: "从网页、图片、视频与短视频提炼内容形式机会"
+  default_prompt: "使用 $searchcans-content-format-brief-zh 映射这个主题在目标市场的内容形式。"
+
+policy:
+  allow_implicit_invocation: false
