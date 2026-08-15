@@ -31,7 +31,13 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/generate_docs.py --check
+      # A repository-scoped token is required only while GitHub creates the
+      # initial Pages site record. Reuse the documented automation token so
+      # the public workflow never relies on a token embedded in repository code.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+          token: ${{ secrets.WIKI_SYNC_TOKEN }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: docs/site

@@ -15,7 +15,7 @@
 ## 一次性 GitHub 配置
 
 1. 在仓库 **Settings → Pages** 中选择 **GitHub Actions** 作为发布源。后续符合条件的推送会由 `publish-docs.yml` 发布 `docs/site/`。
-2. 创建一个只能推送到 `https://github.com/SearchCans/searchcans-skills-zh.wiki.git` 的自动化凭据，并在 **Settings → Secrets and variables → Actions → Repository secrets** 中保存为 `WIKI_SYNC_TOKEN`。
+2. 创建一个自动化凭据，并在 **Settings → Secrets and variables → Actions → Repository secrets** 中保存为 `WIKI_SYNC_TOKEN`。该凭据需要能推送到 `https://github.com/SearchCans/searchcans-skills-zh.wiki.git`，并具有 **Pages: write** 权限；同一个令牌也只在首次发布时用于创建 GitHub Pages 站点记录。
 3. `sync-wiki.yml` 仅在 `main` 的文档/Skill 变化时运行，或从 **Actions → Run workflow** 手动运行。它先验证机密，再仅复制 `.searchcans-generated-pages` 列出的页面；不会递归清空未知的手工 Wiki 页面。
 
 使用专用机器人或最小权限令牌。工作流通过一次性 `GIT_ASKPASS` 助手把令牌交给 Git，不会把它写入远程 URL、仓库、生成文档、Action 日志或面向用户的页面。
