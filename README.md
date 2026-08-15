@@ -4,7 +4,7 @@
 
 SearchCans 官方简体中文 Agent Skills。让 AI Agent 使用 **SearchCans SERP API、Reader API、File Extraction API、Screenshot API 和 Account API** 获取地域化 Google/Bing 搜索证据、提取适合 LLM 阅读的网页与文件内容，并在受控积分和并发下完成深度研究、SEO/GEO 内容规划、市场观察、电商搜索研究与 RAG 来源策展。
 
-当前版本为 **v1.1.0**，包含 7 个经过离线回归检查和真实 API 冒烟验证的 Skills，适合实际的市场与竞品研究、SEO/GEO 选题、RAG 素材准备、动态网页抓取诊断、页面级基础 SEO 检查、电商搜索研究及新闻观察。
+当前版本为 **v1.1.1**，包含 7 个经过离线回归检查和真实 API 冒烟验证的 Skills，适合实际的市场与竞品研究、SEO/GEO 选题、RAG 素材准备、动态网页抓取诊断、页面级基础 SEO 检查、电商搜索研究及新闻观察。
 
 > Need English instructions? See the [official English repository](https://github.com/SearchCans/searchcans-skills). This repository is the independent Simplified Chinese edition; its Skill names end in `-zh`, so both editions can be installed in the same project.
 
